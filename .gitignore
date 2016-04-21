@@ -1,2 +1,5 @@
-MeteorApp/settings.json
+communitybackend/settings.json
 .idea
+.DS_Store
+communitybackend/settings-production.json
+communitybackend/npm-debug.log
