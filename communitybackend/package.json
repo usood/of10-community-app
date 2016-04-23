@@ -1,7 +1,7 @@
 {
-  "name": "application-name",
+  "name": "OF10-Community-App",
   "version": "1.0.0",
-  "description": "Application description.",
+  "description": "A Web Portal for the OF10 Community",
   "scripts": {
     "start": "meteor --settings settings.json",
     "staging": "meteor deploy staging.meteor.com --settings settings.json",

@@ -6,6 +6,15 @@ const handleRedirect = ( routes, redirect ) => {
 	}
 };
 
+Template.default.onRendered( () => {
+	Tracker.autorun( () => {
+		let isChannel   = FlowRouter.getParam( 'channel' ),
+			bodyClasses = document.body.classList;
+
+		return isChannel ? bodyClasses.add( 'is-channel' ) : bodyClasses.remove( 'is-channel' );
+	});
+});
+
 Template.default.helpers({
 	loggingIn() {
 		return Meteor.loggingIn();
@@ -19,12 +28,9 @@ Template.default.helpers({
 			'signup',
 			'recover-password',
 			'reset-password'
-		], '/' );
+		], '/messages/general' );
 	},
 	redirectPublic() {
-		return handleRedirect([
-			'index',
-			'dashboard'
-		], '/login' );
+		return handleRedirect( [ 'channel' ], '/login' );
 	}
 });

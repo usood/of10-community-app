@@ -9,6 +9,21 @@ let _validate = ( form, template ) => {
 let validation = ( template ) => {
   return {
     rules: {
+      firstName: {
+        required: true
+      },
+      lastName: {
+        required: true
+      },
+      username: {
+        required: true,
+        minlength: 6,
+        maxlength: 20
+      },
+      mobileNumber: {
+        required: true,
+        number: true
+      },
       emailAddress: {
         required: true,
         email: true
@@ -19,6 +34,19 @@ let validation = ( template ) => {
       }
     },
     messages: {
+      firstName: {
+        required: 'What is your first name?'
+      },
+      lastName: {
+        required: 'How about a second name?'
+      },
+      mobileNumber: {
+        required: 'How about a mobile number',
+        number: "Mobile number should be a number"
+      },
+      username: {
+        required: 'What username would you like?'
+      },
       emailAddress: {
         required: 'Need an email address here.',
         email: 'Is this email address legit?'
@@ -34,15 +62,29 @@ let validation = ( template ) => {
 
 let _handleSignup = ( template ) => {
   let user = {
+    mobilenumber: template.find( '[name="mobileNumber"]').value,
+    username: template.find( '[name="username"]').value,
     email: template.find( '[name="emailAddress"]' ).value,
-    password: template.find( '[name="password"]' ).value
+    password: template.find( '[name="password"]' ).value,
+    profile: {
+      name: {
+        first: template.find( '[name="firstName"]' ).value,
+        last: template.find( '[name="lastName"]' ).value
+      }
+    }
   };
 
   Accounts.createUser( user, ( error ) => {
     if ( error ) {
       Bert.alert( error.reason, 'danger' );
     } else {
-      Bert.alert( 'Welcome!', 'success' );
+      Meteor.call( 'sendVerificationLink', ( error, response ) => {
+        if ( error ) {
+          Bert.alert( error.reason, 'danger' );
+        } else {
+          Bert.alert( 'Welcome!', 'success' );
+        }
+      });
     }
   });
 };

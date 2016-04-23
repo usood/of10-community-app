@@ -1,7 +1,7 @@
 let administrators = [
   {
     name: { first: 'Admin', last: 'McAdmin' },
-    email: 'admin@admin.com',
+    email: 'admin@of10.in',
     password: 'password'
   }
 ];
@@ -27,7 +27,14 @@ let _createUsers = ( users ) => {
         userExists = _checkIfUserExists( user.email );
 
     if ( !userExists ) {
-      _createUser( user );
+      let userId  = _createUser( user ),
+          isAdmin = _checkIfAdmin( user.email );
+
+      if ( isAdmin ) {
+        Roles.setUserRoles( userId, 'admin' );
+      } else {
+        Roles.setUserRoles( userId, 'member' );
+      }
     }
   }
 };
@@ -58,6 +65,12 @@ let _generateFakeUsers = ( count ) => {
   }
 
   return users;
+};
+
+let _checkIfAdmin = ( email ) => {
+  return _.find( administrators, ( admin ) => {
+    return admin.email === email;
+  });
 };
 
 Modules.server.generateAccounts = generateAccounts;

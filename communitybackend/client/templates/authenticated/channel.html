@@ -1,0 +1,27 @@
+<template name="channel">
+
+    {{#unless currentUser.emails.[0].verified}}
+        <p class="alert alert-warning">You need to verify your email address before using OF10 Community. <a href="#" class="resend-verification-link">Resend verification link</a>.</p>
+    {{else}}
+        {{> sidebar}}
+        <div class="conversation">
+            <div id="messages">
+                <div class="messages-list {{#if isLoading}}loading-list{{/if}}">
+                    {{#each messages}}
+                        {{> message}}
+                    {{else}}
+                        {{#if isDirect}}
+                            <p class="alert alert-warning">You haven't said anything to {{username}} yet. Say hello!</p>
+                        {{else}}
+                            <p class="alert alert-warning">This channel is pretty quiet. You should way something!</p>
+                        {{/if}}
+                    {{/each}}
+                </div>
+            </div>
+
+            <div class="message-input">
+                <input name="message" placeholder="Type your message here...">
+            </div>
+        </div>
+    {{/unless}}
+</template>

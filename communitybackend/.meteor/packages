@@ -41,3 +41,12 @@ themeteorchef:bert
 twbs:bootstrap
 browser-policy
 themeteorchef:jquery-validation
+email
+themeteorchef:seeder
+themeteorchef:commonmark
+momentjs:moment
+risul:moment-timezone
+check
+tinytest
+accounts-twitter
+alanning:roles

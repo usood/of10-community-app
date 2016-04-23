@@ -1,0 +1,23 @@
+<template name="search">
+    <div class="page-header clearfix">
+        <h4 class="pull-left">Members</h4>
+        <div class="pull-right">
+            <input type="text" name="search" class="form-control" width="250px" placeholder="Find a member...">
+        </div>
+    </div>
+
+    <ul class="list-group">
+        {{#if searching}}
+            {{> loading}}
+        {{else}}
+            {{#each users}}
+                <li class="list-group-item clearfix">
+                    <span class="pull-left">{{firstname}} {{lastname}}</span>
+                    <span class="pull-right">{{phoneNumber}}</span>
+                </li>
+            {{else}}
+                <p class="alert alert-warning">Nothing found for {{query}}. Sorry</p>
+            {{/each}}
+        {{/if}}
+    </ul>
+</template>
