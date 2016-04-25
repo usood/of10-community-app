@@ -6,7 +6,8 @@ Meteor.publish( 'user', function() {
             "services.google.email": 1,
             "services.twitter.screenName": 1,
             "emails": 1,
-            "profile": 1
+            "profile": 1,
+            "md5hash": 1
         }
     });
 });
